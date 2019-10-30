@@ -1,0 +1,95 @@
+<div class="panel panel-default shadow-z-0">
+  <div class="video-wrapper">
+    <div class="video-hover-buttons" ng-show="verto.data.callState == 'active'">
+      <div id="moderator-tools" ng-show="verto.data.confRole == 'moderator'">
+        <button tooltip-placement="bottom" tooltip-title="Play" uib-tooltip="Play"
+                class="btn btn-material-blue-900" ng-click="play()">
+        <i class="mdi-av-play-circle-outline"></i>
+      </button>
+      <button tooltip-placement="bottom" tooltip-title="Stop" uib-tooltip="Stop"
+              class="btn btn-material-blue-900" ng-click="stop()">
+        <i class="mdi-av-stop"></i>
+      </button>
+      <button tooltip-placement="bottom" tooltip-title="Record" uib-tooltip="Record"
+              class="btn btn-material-blue-900" ng-click="record()">
+        <i class="mdi-toggle-radio-button-on"></i>
+      </button>
+      <button tooltip-placement="bottom" tooltip-title="Stop Record" uib-tooltip="Stop Record"
+              class="btn btn-material-blue-900" ng-click="stopRecord()">
+        <i class="mdi-image-switch-camera"></i>
+      </button>
+      <button tooltip-placement="bottom" tooltip-title="Snapshot" uib-tooltip="Snapshot"
+              tooltip-lazy="false" class="btn btn-material-blue-900" ng-click="snapshot()">
+        <i class="mdi-image-photo-camera"></i>
+      </button>
+      <div class="btn-group">
+        <button tooltip-placement="bottom" tooltip-title="Video Mode" uib-tooltip="Video Mode"
+                type="button" class="btn btn-material-blue-900 dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="mdi-action-view-module"></i>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li ng-repeat="layout in verto.data.confLayouts">
+            <a ng-click="confChangeVideoLayout(layout)">{{ layout }}</a>
+          </li>
+        </ul>
+      </div>
+      </div>
+      <div class="user-tools">
+        <button tooltip-placement="bottom" tooltip-title="(un)Mute Mic" uib-tooltip="(un)Mute Mic"
+                class="btn btn-material-blue-900" ng-click="muteMic(cbMuteMic)">
+          <i class="" ng-class="{'mdi-av-mic': !verto.data.mutedMic, 'mdi-av-mic-off': verto.data.mutedMic}"></i>
+        </button>
+        <button tooltip-placement="bottom" tooltip-title="(un)Mute Video" uib-tooltip="(un)Mute Video"
+                class="btn btn-material-blue-900" ng-click="muteVideo(cbMuteVideo)" ng-if="verto.data.canVideo">
+          <i class="" ng-class="{'mdi-av-videocam': !verto.data.mutedVideo, 'mdi-av-videocam-off': verto.data.mutedVideo}"></i>
+        </button>
+        <button tooltip-placement="bottom" tooltip-title="Toggle Fullscreen Mode" uib-tooltip="Toggle Fullscreen Mode"
+                class="btn btn-material-blue-900" ng-click="goFullscreen()">
+          <i class="" ng-class="{'mdi-navigation-fullscreen': !fullscreenEnabled, 'mdi-navigation-fullscreen-exit': fullscreenEnabled}"></i>
+        </button>
+        <button tooltip-placement="bottom" tooltip-title="Screenshare" uib-tooltip="Screenshare"
+                class="btn btn-material-blue-900" ng-click="screenshare()">
+          <i class="mdi-hardware-desktop-windows"></i>
+        </button>
+        <button tooltip-placement="bottom" tooltip-title="Open/Close Chat" uib-tooltip="Open/Close Chat"
+                class="btn btn-material-blue-900" ng-click="toggleChat()" ng-show="fullscreenEnabled">
+          <i class="mdi-communication-chat"></i>
+        </button>
+        <div class="btn-group">
+          <button tooltip-placement="bottom" tooltip-title="Speaker" uib-tooltips="Speaker" type="button" class="btn btn-material-blue-900 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="mdi-hardware-headset"></i>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="speaker in verto.data.speakerDevices">
+              <a ng-click="confChangeSpeaker(speaker.id)">{{ speaker.label }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="video-tag-wrapper" id="video-tag-wrapper" ng-dblclick="goFullscreen()" show-controls>
+      <video-tag ng-class="{'invisible': (verto.data.callState != 'active')}"></video-tag>
+      <svg ng-show="verto.data.callState != 'active'" class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+      </svg>
+    </div>
+    <div class="video-footer panel-body">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 text-left">
+          <div class="video-timer">
+            <timer start-time="start_time" autostart="false" interval="1000">{{hhours}}:{{mminutes}}:{{sseconds}}</timer>
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-6 text-right">
+          <button class="btn btn-danger" ng-click="hangup()">
+            <i class="mdi-communication-call-end"></i>
+            End Call
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

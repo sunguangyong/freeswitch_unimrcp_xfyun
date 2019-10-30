@@ -1,0 +1,35 @@
+
+<include>
+  <!-- UniMRCP Server MRCPv2 -->
+  <!-- 后面我们使用该配置文件，均使用 name 作为唯一标识，而不是文件名 -->
+  <profile name="unimrcpserver-mrcp2" version="2">
+    <!-- MRCP 服务器地址 -->
+    <param name="server-ip" value="127.0.1.1"/>
+    <!-- MRCP SIP 端口号 -->
+    <param name="server-port" value="8060"/>
+    <param name="resource-location" value=""/>
+
+    <!-- FreeSWITCH IP、端口以及 SIP 传输方式 -->
+    <param name="client-ip" value="192.168.5.145" />
+    <param name="client-port" value="5069"/>
+    <param name="sip-transport" value="udp"/>
+
+
+    <param name="speechsynth" value="speechsynthesizer"/>
+    <param name="speechrecog" value="speechrecognizer"/>
+    <!--param name="rtp-ext-ip" value="auto"/-->
+    <param name="rtp-ip" value="192.168.5.145"/>
+    <param name="rtp-port-min" value="4000"/>
+    <param name="rtp-port-max" value="5000"/>
+    <param name="codecs" value="PCMU PCMA L16/96/8000"/>
+
+    <!-- Add any default MRCP params for SPEAK requests here -->
+    <synthparams>
+    </synthparams>
+
+    <!-- Add any default MRCP params for RECOGNIZE requests here -->
+    <recogparams>
+      <!--param name="start-input-timers" value="false"/-->
+    </recogparams>
+  </profile>
+</include>
